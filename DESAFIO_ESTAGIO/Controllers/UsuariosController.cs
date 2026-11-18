@@ -7,11 +7,22 @@ namespace DESAFIO_ESTAGIO.Controllers
     public class UsuariosController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Listar() 
-        { 
-           List<Usuario> usuarios = new();
-           return Ok(usuarios);
-           
+        public IActionResult Listar()
+        {
+            List<Usuario> usuarios = new();
+            return Ok(usuarios);
+        }
+        [HttpGet("{id:int}")]
+        public IActionResult BuscaId(int id)
+        {
+
+            return NotFound();
+        }
+        [HttpPost]
+        public IActionResult Cadastrar()
+        {
+            return BadRequest();
         }
     }
 }
+     
