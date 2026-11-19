@@ -1,4 +1,4 @@
-﻿namespace DESAFIO_ESTAGIO.Contracts
+﻿namespace DESAFIO_ESTAGIO.Contracts 
 {
     public class CadastrarUsuarioRequest
     {  

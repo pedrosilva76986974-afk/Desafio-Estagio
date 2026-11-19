@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using DESAFIO_ESTAGIO.Contracts;
 
 namespace DESAFIO_ESTAGIO.Controllers
 {
@@ -9,7 +10,7 @@ namespace DESAFIO_ESTAGIO.Controllers
         [HttpGet]
         public IActionResult Listar()
         {
-            List<Usuario> usuarios = new();
+            List<UsuarioResponse> usuarios = new();
             return Ok(usuarios);
         }
         [HttpGet("{id:int}")]
@@ -19,9 +20,45 @@ namespace DESAFIO_ESTAGIO.Controllers
             return NotFound();
         }
         [HttpPost]
-        public IActionResult Cadastrar()
+        public IActionResult Cadastrar(CadastrarUsuarioRequest request)
         {
-            return BadRequest();
+            if (string.IsNullOrWhiteSpace(request.Nome))
+            {
+                return BadRequest("Nome não pode ser nulo ou vazio.");
+            }
+            if (string.IsNullOrWhiteSpace(request.Login))
+            {
+                return BadRequest("Login não pode ser nulo ou vazio.");
+            }
+            if (string.IsNullOrWhiteSpace(request.Senha))
+            {
+                return BadRequest("Senha não pode ser nulo ou vazio.");
+            }
+            UsuarioResponse resposta = new UsuarioResponse
+            {
+                Nome = request.Nome,
+                Login = request.Login
+            };
+            return Ok(resposta);
+        }
+        [HttpPut("{id:int}")]
+        public IActionResult Atualizar(int id, AtualizarUsuarioRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request.Nome))
+            {
+                return BadRequest("Nome não pode ser nulo ou vazio.");
+            }
+            if (string.IsNullOrWhiteSpace(request.Login))
+            {
+                return BadRequest("Login não pode ser nulo ou vazio.");
+            }
+
+            return NotFound();
+        }
+        [HttpDelete("{id:int}")]
+        public IActionResult Deletar(int id)
+        {
+            return NotFound();
         }
     }
 }
